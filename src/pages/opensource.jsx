@@ -6,7 +6,7 @@ import NavBar from "../components/common/navBar";
 import Footer from "../components/common/footer";
 import Logo from "../components/common/logo";
 
-import Cell from "../components/common/cell";
+import Cell from "../components/common/Cell";
 import ProjectINFO from '../data/opensource';
 import SEO from "../data/seo";
 import INFO from "../data/user";

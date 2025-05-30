@@ -12,7 +12,7 @@ const Profile = (props) => {
             <Link src={link}>
                 <div className="profile-container">
                     <div className="profile-img">
-                        <Avatar size={120} src={<img src={profile} alt="avatar" />} />
+                        <Avatar size={120} src={<img src={`${process.env.PUBLIC_URL}/${profile}`} alt="avatar" />} />
                     </div>
                     <div className="profile-name">
                         {name}

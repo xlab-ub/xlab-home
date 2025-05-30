@@ -46,7 +46,7 @@ const Opensource = () => {
 						</div>
 						<div className="opensource-img">
 							<img
-								src="banner.jpg"
+								src={`${process.env.PUBLIC_URL}/banner.jpg`}
 								alt="about"
 							/>
 						</div>

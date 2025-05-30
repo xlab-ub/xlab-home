@@ -8,7 +8,7 @@ const Sponsor = (props) => {
 	return (
 		<React.Fragment>
 			<div className="sponsor-cell">
-                <img src={logo} alt="logo" />
+                <img src={`${process.env.PUBLIC_URL}/${logo}`} alt="logo" />
                 {/* <div className="homepage-new-description">
                     {title} */}
             </div>

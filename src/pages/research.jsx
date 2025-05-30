@@ -46,7 +46,7 @@ const Research = () => {
 						</div>
 						<div className="research-img">
 							<img
-								src="AI.jpg"
+								src={`${process.env.PUBLIC_URL}/AI.jpg`}
 								alt="about"
 							/>
 						</div>

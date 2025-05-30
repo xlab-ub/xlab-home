@@ -44,7 +44,7 @@ const Team = () => {
 						</div>
 
 						<div className="team-img">
-							<img src="banner.jpg" alt="about" />
+							<img src={`${process.env.PUBLIC_URL}/banner.jpg`} alt="about" />
 						</div>
 						
 						<div className="team-wrapper">

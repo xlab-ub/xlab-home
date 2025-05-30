@@ -12,7 +12,7 @@ const Cell = ({ data }) => (
 		<Link to={data.paper}><FilePdfOutlined style={{ fontSize: '24px', color: '#005BBB'}}/></Link>{" "}</h4>
     </header>
     <a href={data.web} className="image">
-        <img src={data.image} alt={data.title} />
+        <img src={`${process.env.PUBLIC_URL}/${data.image}`} alt={data.title} />
     </a>
     <div className="separate">
       <hr />

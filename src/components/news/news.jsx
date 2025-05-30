@@ -12,7 +12,7 @@ const New = (props) => {
                 <Link to={link}>
                     <div className="homepage-new-content">
                         <div className="homepage-new-header">
-                            <div className="homepage-new-icon"><img src="calendar.png" alt="logo" /></div>
+                            <div className="homepage-new-icon"><img src={`${process.env.PUBLIC_URL}/calendar.png`} alt="logo" /></div>
                             <div className="homepage-new-date">{date}</div>
                         </div>
                         <div className="homepage-new-description">

@@ -13,7 +13,7 @@ const Case = (props) => {
                     <div className="case-conf-name">{conf}</div>
                     <div className="case-paper-name">{paper}</div>
                     <div className="case-img">
-                        <img src={img} />
+                        <img src={`${process.env.PUBLIC_URL}/${img}`} />
                     </div>
                     <div className="case-description">{description}</div>
                 </div>

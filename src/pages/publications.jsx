@@ -52,7 +52,7 @@ const Publications = () => {
 
 						<div className="publications-img">
 							<img
-								src="banner.jpg"
+								src={`${process.env.PUBLIC_URL}/banner.jpg`}
 								alt="about"
 							/>
 						</div>

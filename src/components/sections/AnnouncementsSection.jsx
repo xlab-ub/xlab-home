@@ -61,7 +61,7 @@ const AnnouncementsSection = () => {
             x: 0,
             duration: 0.6,
             ease: 'back.out(1.2)',
-            stagger: 0.1
+            stagger: 0.15
           }, '-=0.4');
         }
       });

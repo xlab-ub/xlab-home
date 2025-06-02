@@ -38,6 +38,26 @@
   /* FORCE VISIBILITY */
   opacity: 1 !important;
   visibility: visible !important;
+  /* SECTION TRANSITIONS */
+  transition: all 0.3s ease;
+}
+
+/* Section transition connectors */
+.section::before {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background: linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.1) 50%, transparent 100%);
+  z-index: 10;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+
+.section:hover::before {
+  opacity: 1;
 }
 
 /* Hero Section - Blue & Black Primary Design */
@@ -51,6 +71,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  /* TRANSITION ENHANCEMENT */
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
 }
 
 /* Background decorative shape */
@@ -63,6 +85,10 @@
   background: linear-gradient(45deg, rgba(255, 255, 255, 0.03), rgba(255, 255, 255, 0.08));
   border-radius: 50%;
   z-index: 1;
+  opacity: 0;
+  scale: 0.7;
+  transform: rotate(180deg);
+  visibility: visible !important;
 }
 
 /* Hero content layout */
@@ -102,36 +128,40 @@
   font-weight: 700;
   color: #FFFFFF;
   margin-bottom: 1rem;
-  opacity: 0;
+  opacity: 0.3;
+  scale: 0.9;
   letter-spacing: -1px;
   text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  visibility: visible !important;
 }
 
 /* Title styling */
 .hero-content h1 {
   font-size: 2rem;
   margin-bottom: 1rem;
-  opacity: 0;
-  transform: translateY(50px);
+  opacity: 0.3;
+  transform: translateY(30px);
   font-family: 'Roboto', sans-serif;
   font-weight: 600;
   color: #FFFFFF;
   line-height: 1.3;
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  visibility: visible !important;
 }
 
 /* Description styling - ENSURE WHITE TEXT */
 .hero-description {
   font-size: 0.9rem;
   margin-bottom: 2rem;
-  opacity: 0;
-  transform: translateY(30px);
+  opacity: 0.3;
+  transform: translateY(20px);
   font-family: 'Heebo', sans-serif;
   font-weight: 300;
   color: #FFFFFF !important;
   line-height: 1.5;
   text-align: left;
   max-width: 95%;
+  visibility: visible !important;
 }
 
 /* FORCE ALL DESCRIPTION TEXT TO BE WHITE */
@@ -169,6 +199,10 @@
   position: relative;
   z-index: 2;
   transition: transform 0.3s ease;
+  opacity: 0.3;
+  scale: 1.05;
+  transform: rotate(-3deg);
+  visibility: visible !important;
 }
 
 .professor-photo:hover {
@@ -191,10 +225,12 @@
 .hero-cta {
   display: flex;
   gap: 0.8rem;
-  opacity: 0;
+  opacity: 0.3;
+  transform: translateY(20px);
   flex-wrap: wrap;
   margin-top: auto;
   padding-bottom: 1rem;
+  visibility: visible !important;
 }
 
 .cta-button {
@@ -317,6 +353,9 @@
   /* FORCE VISIBILITY */
   opacity: 1 !important;
   visibility: visible !important;
+  /* TRANSITION ENHANCEMENT */
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  position: relative;
 }
 
 .research-content {
@@ -350,6 +389,12 @@
   visibility: visible !important;
 }
 
+/* Hijacked scroll container - disable normal scrolling */
+.horizontal-scroll-container.hijacked {
+  overflow: hidden;
+  position: relative;
+}
+
 .research-cards-horizontal {
   display: flex;
   gap: 2rem;
@@ -357,6 +402,12 @@
   min-width: max-content;
   opacity: 1 !important;
   visibility: visible !important;
+}
+
+/* Hijacked cards container - smooth transitions */
+.research-cards-horizontal.hijacked {
+  will-change: transform;
+  transition: none; /* GSAP will handle transitions */
 }
 
 .research-card-horizontal {
@@ -377,6 +428,17 @@
   position: relative;
   overflow: hidden;
   visibility: visible !important;
+}
+
+/* Hijacked cards - enhanced for scroll control */
+.research-card-horizontal.hijacked {
+  will-change: transform, filter;
+  transition: none; /* GSAP will handle all transitions */
+  cursor: pointer;
+}
+
+.research-card-horizontal.hijacked:hover {
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
 }
 
 .research-card-horizontal::before {
@@ -493,6 +555,9 @@
   /* FORCE VISIBILITY */
   opacity: 1 !important;
   visibility: visible !important;
+  /* TRANSITION ENHANCEMENT */
+  box-shadow: 0 8px 32px rgba(30, 86, 160, 0.3);
+  position: relative;
 }
 
 .announcements-content {
@@ -612,6 +677,145 @@
   background: rgba(255, 255, 255, 0.5);
 }
 
+/* Progress Indicator Styles */
+.scroll-progress-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 2rem;
+  gap: 1rem;
+  opacity: 0;
+  visibility: visible !important;
+}
+
+.scroll-progress-bar {
+  width: 200px;
+  height: 4px;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 2px;
+  overflow: hidden;
+  position: relative;
+}
+
+.scroll-progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #FFFFFF, rgba(255, 255, 255, 0.8));
+  border-radius: 2px;
+  transform-origin: left;
+  transform: scaleX(0);
+  transition: transform 0.3s ease;
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+  position: relative;
+}
+
+.scroll-progress-fill::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 4px;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 2px;
+  box-shadow: 0 0 8px rgba(255, 255, 255, 0.6);
+}
+
+.scroll-progress-text {
+  color: #FFFFFF;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 600;
+  font-size: 0.9rem;
+  background: rgba(255, 255, 255, 0.1);
+  padding: 0.3rem 0.8rem;
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(10px);
+  opacity: 0;
+  visibility: visible !important;
+}
+
+/* Scroll Instructions */
+.scroll-instructions {
+  text-align: center;
+  margin-top: 3rem;
+  opacity: 0.7;
+  animation: pulseGlow 3s ease-in-out infinite;
+}
+
+.scroll-instructions p {
+  color: rgba(255, 255, 255, 0.8);
+  font-family: 'Heebo', sans-serif;
+  font-size: 1rem;
+  font-style: italic;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  position: relative;
+}
+
+.scroll-instructions p::before {
+  content: '↕️';
+  animation: bounce 2s ease-in-out infinite;
+  margin-right: 0.5rem;
+}
+
+.scroll-instructions p::after {
+  content: '🔄';
+  animation: rotate 2s linear infinite;
+  margin-left: 0.5rem;
+}
+
+@keyframes bounce {
+  0%, 20%, 50%, 80%, 100% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(-8px);
+  }
+  60% {
+    transform: translateY(-4px);
+  }
+}
+
+@keyframes pulseGlow {
+  0%, 100% {
+    opacity: 0.7;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.02);
+  }
+}
+
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Enhanced card hover effects for hijacked mode */
+.research-card-horizontal.hijacked::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background: linear-gradient(90deg, #1E56A0, #2B2B2B);
+  transition: height 0.3s ease;
+}
+
+.research-card-horizontal.hijacked:hover::before {
+  height: 6px;
+  background: linear-gradient(90deg, #1E56A0, #0d3660);
+}
+
 /* Responsive Design */
 @media (max-width: 1024px) {
   .hero-content {
@@ -657,6 +861,28 @@
   .hero-cta {
     justify-content: center;
     margin-top: 0;
+  }
+  
+  .scroll-progress-container {
+    margin-bottom: 1.5rem;
+  }
+  
+  .scroll-progress-bar {
+    width: 150px;
+    height: 3px;
+  }
+  
+  .scroll-progress-text {
+    font-size: 0.8rem;
+    padding: 0.25rem 0.6rem;
+  }
+  
+  .scroll-instructions {
+    margin-top: 2rem;
+  }
+  
+  .scroll-instructions p {
+    font-size: 0.9rem;
   }
 }
 
@@ -714,10 +940,9 @@
     padding: 0 1rem;
   }
   
-  .research-card-horizontal {
+  .research-card-horizontal.hijacked {
     min-width: 280px;
     max-width: 280px;
-    padding: 2rem;
     height: 350px;
   }
   
@@ -725,6 +950,15 @@
     min-width: 250px;
     max-width: 250px;
     height: 220px;
+  }
+  
+  .scroll-progress-container {
+    flex-direction: column;
+    gap: 0.8rem;
+  }
+  
+  .scroll-progress-bar {
+    width: 120px;
   }
 }
 
@@ -752,10 +986,9 @@
     margin-bottom: 2rem;
   }
   
-  .research-card-horizontal {
+  .research-card-horizontal.hijacked {
     min-width: 240px;
     max-width: 240px;
-    padding: 1.5rem;
     height: 320px;
   }
   
@@ -764,6 +997,19 @@
     max-width: 220px;
     padding: 1.5rem;
     height: 200px;
+  }
+  
+  .scroll-progress-bar {
+    width: 100px;
+    height: 2px;
+  }
+  
+  .scroll-progress-text {
+    font-size: 0.75rem;
+  }
+  
+  .scroll-instructions p {
+    font-size: 0.8rem;
   }
 }
 
@@ -776,6 +1022,9 @@
   /* FORCE VISIBILITY */
   opacity: 1 !important;
   visibility: visible !important;
+  /* TRANSITION ENHANCEMENT */
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  position: relative;
 }
 
 .sponsors-content {

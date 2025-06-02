@@ -1,6 +1,5 @@
 import React, { useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import INFO from '../../data/user';
 
 const HeroSection = () => {
@@ -11,6 +10,7 @@ const HeroSection = () => {
   const photoRef = useRef();
   const backgroundShapeRef = useRef();
   const ctaButtonRef = useRef();
+  const hasAnimated = useRef(false);
 
   useEffect(() => {
     const section = sectionRef.current;
@@ -21,80 +21,136 @@ const HeroSection = () => {
     const backgroundShape = backgroundShapeRef.current;
     const ctaButton = ctaButtonRef.current;
 
-    // Set initial states
-    gsap.set([title, description, ctaButton], {
-      opacity: 0,
-      y: 50
-    });
-
-    gsap.set(logo, {
-      opacity: 0,
-      scale: 0.8
-    });
-
-    gsap.set(photo, {
-      opacity: 0,
-      scale: 1.1,
-      rotation: -5
-    });
-
-    gsap.set(backgroundShape, {
-      opacity: 0,
-      scale: 0.5,
-      rotation: 180
-    });
-
-    // Create animation timeline
-    const tl = gsap.timeline({
-      delay: 0.3
-    });
-
-    // Add animations to timeline
-    tl.to(backgroundShape, {
-      opacity: 0.1,
+    // Keep content visible by default (no blank sections)
+    gsap.set([title, description, logo, photo, backgroundShape, ctaButton], {
+      opacity: 1,
+      y: 0,
       scale: 1,
       rotation: 0,
-      duration: 1.5,
-      ease: 'power2.out'
-    })
-    .to(photo, {
-      opacity: 1,
-      scale: 1,
-      rotation: 0,
-      duration: 1.2,
-      ease: 'back.out(1.2)'
-    }, '-=1')
-    .to(logo, {
-      opacity: 1,
-      scale: 1,
-      duration: 1,
-      ease: 'back.out(1.5)'
-    }, '-=0.8')
-    .to(title, {
-      opacity: 1,
-      y: 0,
-      duration: 1,
-      ease: 'power3.out'
-    }, '-=0.5')
-    .to(description, {
-      opacity: 1,
-      y: 0,
-      duration: 0.8,
-      ease: 'power3.out'
-    }, '-=0.5')
-    .to(ctaButton, {
-      opacity: 1,
-      y: 0,
-      duration: 0.6,
-      ease: 'power3.out'
-    }, '-=0.3');
+      visibility: 'visible'
+    });
 
-    return () => {
-      ScrollTrigger.getAll().forEach(trigger => {
-        if (trigger.trigger === section) {
-          trigger.kill();
+    // Set initial animation states (subtle so content stays visible)
+    gsap.set(logo, { opacity: 0.3, scale: 0.9 });
+    gsap.set(title, { opacity: 0.3, y: 30 });
+    gsap.set(description, { opacity: 0.3, y: 20 });
+    gsap.set(ctaButton, { opacity: 0.3, y: 20 });
+    gsap.set(photo, { opacity: 0.3, scale: 1.05, rotation: -3 });
+    gsap.set(backgroundShape, { opacity: 0, scale: 0.7, rotation: 180 });
+
+    // Use Intersection Observer for reliable viewport detection
+    const observerOptions = {
+      root: null,
+      rootMargin: '-20% 0px -20% 0px', // Trigger when 20% of element is visible
+      threshold: 0.1
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting && !hasAnimated.current) {
+          console.log('Hero section intersecting - triggering animation');
+          hasAnimated.current = true;
+          
+          // Create and play animation with standardized timing
+          const tl = gsap.timeline({ delay: 0.3 });
+          
+          tl.to(backgroundShape, {
+            opacity: 0.1,
+            scale: 1,
+            rotation: 0,
+            duration: 1.2,
+            ease: 'power3.out'
+          })
+          .to(photo, {
+            opacity: 1,
+            scale: 1,
+            rotation: 0,
+            duration: 0.8,
+            ease: 'back.out(1.2)'
+          }, '-=0.8')
+          .to(logo, {
+            opacity: 1,
+            scale: 1,
+            duration: 1,
+            ease: 'power3.out'
+          }, '-=0.6')
+          .to(title, {
+            opacity: 1,
+            y: 0,
+            duration: 1,
+            ease: 'power3.out'
+          }, '-=0.6')
+          .to(description, {
+            opacity: 1,
+            y: 0,
+            duration: 0.8,
+            ease: 'power3.out'
+          }, '-=0.6')
+          .to(ctaButton, {
+            opacity: 1,
+            y: 0,
+            duration: 0.6,
+            ease: 'back.out(1.2)'
+          }, '-=0.4');
         }
       });
+    }, observerOptions);
+
+    // Start observing the section (Hero section should animate immediately)
+    if (section) {
+      // For hero section, trigger animation immediately
+      setTimeout(() => {
+        hasAnimated.current = true;
+        
+        // Create and play animation with standardized timing
+        const tl = gsap.timeline({ delay: 0.3 });
+        
+        tl.to(backgroundShape, {
+          opacity: 0.1,
+          scale: 1,
+          rotation: 0,
+          duration: 1.2,
+          ease: 'power3.out'
+        })
+        .to(photo, {
+          opacity: 1,
+          scale: 1,
+          rotation: 0,
+          duration: 0.8,
+          ease: 'back.out(1.2)'
+        }, '-=0.8')
+        .to(logo, {
+          opacity: 1,
+          scale: 1,
+          duration: 1,
+          ease: 'power3.out'
+        }, '-=0.6')
+        .to(title, {
+          opacity: 1,
+          y: 0,
+          duration: 1,
+          ease: 'power3.out'
+        }, '-=0.6')
+        .to(description, {
+          opacity: 1,
+          y: 0,
+          duration: 0.8,
+          ease: 'power3.out'
+        }, '-=0.6')
+        .to(ctaButton, {
+          opacity: 1,
+          y: 0,
+          duration: 0.6,
+          ease: 'back.out(1.2)'
+        }, '-=0.4');
+      }, 500);
+    }
+
+    return () => {
+      // Clean up observer
+      if (observer && section) {
+        observer.unobserve(section);
+      }
     };
   }, []);
 

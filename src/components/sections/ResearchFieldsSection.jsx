@@ -150,9 +150,6 @@ const ResearchFieldsSection = () => {
             )}
           </div>
         </div>
-        <div className="scroll-indicator">
-          <span>← Scroll horizontally to explore all research areas →</span>
-        </div>
       </div>
     </section>
   );

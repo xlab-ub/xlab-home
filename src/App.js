@@ -4,7 +4,6 @@ import React from "react";
 import { Routes, Route } from "react-router-dom";
 
 import Homepage from "./pages/homepage";
-import Homepage2 from "./pages/homepage2";
 import Team from "./pages/team";
 import Research from "./pages/research";
 import Publications from "./pages/publications";
@@ -26,7 +25,6 @@ function App() {
 		<div className="App">
 			<Routes>
 				<Route path="/xlab-home/" element={<Homepage />} />
-				<Route path="/xlab-home2/" element={<Homepage2 />} />
 				<Route path="/xlab-home/bio" element={<Bio />} />
 				<Route path="/xlab-home/blog" element={<Blog />} />
 				<Route path="/xlab-home/events" element={<Events />} />

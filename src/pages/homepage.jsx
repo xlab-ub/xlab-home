@@ -5,7 +5,7 @@ import HeroSection from '../components/sections/HeroSection';
 import ResearchFieldsSection from '../components/sections/ResearchFieldsSection';
 import AnnouncementsSection from '../components/sections/AnnouncementsSection';
 import SponsorsSection from '../components/sections/SponsorsSection';
-import './homepage2.css';
+import './styles/homepage.css';
 
 const Homepage = () => {
   const containerRef = useRef();

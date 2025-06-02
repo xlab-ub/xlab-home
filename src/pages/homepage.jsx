@@ -1,149 +1,102 @@
-import React, { useEffect } from "react";
-import { Helmet } from "react-helmet";
-import { Link } from "react-router-dom";
-import { faMailBulk } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-	faTwitter,
-	faGithub,
-} from "@fortawesome/free-brands-svg-icons";
-import Logo from "../components/common/logo";
-import Footer from "../components/common/footer";
-import NavBar from "../components/common/navBar";
-import AllNews from "../components/news/allNews";
-import AllProjects from "../components/projects/allProjects";
-import Sponsor from "../components/homepage/sponsor";
+import React, { useEffect, useRef } from 'react';
+import { gsap } from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import Lenis from '@studio-freight/lenis';
+import HeroSection from '../components/sections/HeroSection';
+import ResearchFieldsSection from '../components/sections/ResearchFieldsSection';
+import AnnouncementsSection from '../components/sections/AnnouncementsSection';
+import SponsorsSection from '../components/sections/SponsorsSection';
+import './homepage2.css';
 
-import SponsorINFO from "../data/sponsor";
-import INFO from "../data/user";
-import SEO from "../data/seo";
-
-import "./styles/homepage.css";
+gsap.registerPlugin(ScrollTrigger);
 
 const Homepage = () => {
+  const containerRef = useRef();
 
-	useEffect(() => {
-		window.scrollTo(0, 0);
-	}, []);
+  useEffect(() => {
+    // Hide body overflow to prevent double scrollbars
+    document.body.style.overflow = 'hidden';
 
-	const currentSEO = SEO.find((item) => item.page === "home");
+    // Force immediate visibility of all sections
+    const sections = document.querySelectorAll('.section');
+    sections.forEach(section => {
+      section.style.opacity = '1';
+      section.style.visibility = 'visible';
+    });
 
-	return (
-		<React.Fragment>
-			<Helmet>
-				<title>{INFO.main.title}</title>
-				<meta name="description" content={currentSEO.description} />
-				<meta
-					name="keywords"
-					content={currentSEO.keywords.join(", ")}
-				/>
-			</Helmet>
+    // Initialize Lenis smooth scrolling
+    const lenis = new Lenis({
+      wrapper: containerRef.current,
+      content: containerRef.current,
+      duration: 1.2,
+      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      direction: 'vertical',
+      gestureDirection: 'vertical',
+      smooth: true,
+      mouseMultiplier: 1,
+      smoothTouch: false,
+      touchMultiplier: 2,
+      infinite: false,
+      normalizeWheel: true,
+    });
 
-			<div className="page-content">
-				<NavBar active="home" />
-				<div className="content-wrapper">
-					<div className="homepage-logo-container">
-						<div className="homepage-logo">
-							<Logo width={80} />
-						</div>
-					</div>
+    // RAF for Lenis
+    function raf(time) {
+      lenis.raf(time);
+      requestAnimationFrame(raf);
+    }
+    requestAnimationFrame(raf);
 
-					<div className="homepage-container">
-						<div className="homepage-first-area">
-							<div className="homepage-first-area-left-side">
-								<div className="title homepage-title">
-									{INFO.homepage.title}
-								</div>
+    // Connect Lenis with GSAP ScrollTrigger
+    lenis.on('scroll', ScrollTrigger.update);
 
-								<div className="subtitle homepage-subtitle">
-									{INFO.homepage.description}
-									<Link to="/xlab-home/bio" style={{color: '#14b8a6'}}>About me</Link>
-					
-								</div>
+    gsap.ticker.lagSmoothing(0);
 
-								<div className="homepage-socials"> 
-									<a
-										href={INFO.socials.twitter}
-										target="_blank"
-										rel="noreferrer"
-									>
-										<FontAwesomeIcon
-											icon={faTwitter}
-											className="homepage-social-icon"
-										/>
-									</a>
-									<a
-										href={INFO.socials.github}
-										target="_blank"
-										rel="noreferrer"
-									>
-										<FontAwesomeIcon
-											icon={faGithub}
-											className="homepage-social-icon"
-										/>
-									</a>
-									<a
-										href={`mailto:${INFO.main.email}`}
-										target="_blank"
-										rel="noreferrer"
-									>
-										<FontAwesomeIcon
-											icon={faMailBulk}
-											className="homepage-social-icon"
-										/>
-									</a>
-								</div>
-							</div>
-                            
-							<div className="homepage-first-area-right-side">
-								<div className="homepage-image-container">
-									<div className="homepage-image-wrapper">
-										<img
-											src={`${process.env.PUBLIC_URL}/homepage.jpg`}
-											alt="about"
-											className="homepage-image"
-										/>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div className="homepage-projects">
-							<Link to="/research"><div className="section-title">
-								{INFO.homepage.subtitle1}
-							</div></Link>
-							<AllProjects />
-						</div>
-						<Link to="/events"><div className="section-title">
-							{INFO.homepage.subtitle2}
-						</div></Link>
-						<div className="homepage-news">
-							<AllNews />
-						</div>
-						<div className="section-title">
-							{INFO.homepage.subtitle3}
-						</div>
-						<div className="homepage-recruit">
-							{INFO.homepage.recruit}
-						</div>
-						<div className="section-title">
-							{INFO.homepage.subtitle4}
-						</div>
-						<div className="sponsor-container ">
-							{SponsorINFO.map((item, index) => (
-								<div key={index} className="sponsor-wrapper">
-									<Sponsor
-									logo={item.logo}
-									/>
-								</div>
-							))}
-						</div>
-						<hr />
-						<Footer />
-					</div>
-				</div>
-			</div>
-		</React.Fragment>
-	);
+    // Multiple refresh attempts to ensure everything works
+    const refreshScrollTrigger = () => {
+      ScrollTrigger.refresh();
+      console.log('ScrollTrigger refreshed');
+    };
+
+    // Immediate refresh
+    refreshScrollTrigger();
+    
+    // Delayed refresh
+    setTimeout(refreshScrollTrigger, 100);
+    setTimeout(refreshScrollTrigger, 500);
+    setTimeout(refreshScrollTrigger, 1000);
+
+    // Handle window events that might affect layout
+    const handleResize = () => {
+      setTimeout(refreshScrollTrigger, 100);
+    };
+
+    const handleLoad = () => {
+      setTimeout(refreshScrollTrigger, 100);
+    };
+
+    window.addEventListener('resize', handleResize);
+    window.addEventListener('load', handleLoad);
+
+    // Clean up
+    return () => {
+      // Restore body overflow when component unmounts
+      document.body.style.overflow = '';
+      window.removeEventListener('resize', handleResize);
+      window.removeEventListener('load', handleLoad);
+      lenis.destroy();
+      ScrollTrigger.getAll().forEach(trigger => trigger.kill());
+    };
+  }, []);
+
+  return (
+    <div ref={containerRef} className="homepage-container">
+      <HeroSection />
+      <ResearchFieldsSection />
+      <AnnouncementsSection />
+      <SponsorsSection />
+    </div>
+  );
 };
 
 export default Homepage;

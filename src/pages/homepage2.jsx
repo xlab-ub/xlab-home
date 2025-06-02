@@ -5,6 +5,7 @@ import Lenis from '@studio-freight/lenis';
 import HeroSection from '../components/sections/HeroSection';
 import ResearchFieldsSection from '../components/sections/ResearchFieldsSection';
 import AnnouncementsSection from '../components/sections/AnnouncementsSection';
+import SponsorsSection from '../components/sections/SponsorsSection';
 import './homepage2.css';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -93,6 +94,7 @@ const Homepage2 = () => {
       <HeroSection />
       <ResearchFieldsSection />
       <AnnouncementsSection />
+      <SponsorsSection />
     </div>
   );
 };

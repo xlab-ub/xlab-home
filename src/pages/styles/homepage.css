@@ -63,7 +63,7 @@
 	scroll-behavior: auto;
 	margin: 0;
 	padding: 0;
-	z-index: 9999;
+	z-index: 1; /* Lower than navbar z-index (999999) */
 	/* Unified gradient background spanning entire page */
 	background: linear-gradient(180deg, 
 		var(--color-primary) 0%,
@@ -113,15 +113,15 @@
 	/* Optimize for performance */
 	will-change: opacity;
 	transform: translateZ(0);
-}
-
-/* Ensure no interference from global styles */
-.homepage-container * {
+  }
+  
+  /* Ensure no interference from global styles */
+  .homepage-container * {
 	box-sizing: border-box;
-}
-
+  }
+  
 /* Section base styles - Semi-transparent with subtle overlays */
-.section {
+  .section {
 	min-height: 100vh;
 	height: auto;
 	position: relative;
@@ -145,7 +145,7 @@
 }
 
 /* Add subtle section overlays for differentiation */
-.section::before {
+  .section::before {
 	content: '';
 	position: absolute;
 	top: 0;
@@ -183,10 +183,10 @@
 	z-index: 10;
 	opacity: 0.3;
 	animation: none;
-}
-
+  }
+  
 /* Remove hover effects that can cause scroll jank */
-.section:hover::before {
+  .section:hover::before {
 	opacity: 0.3;
 }
 
@@ -196,17 +196,17 @@
 }
 
 /* Hero Section - Transparent with subtle blue tint overlay */
-.hero-section {
+  .hero-section {
   /* Remove solid background - use transparent with overlay */
   background: transparent;
   color: var(--color-white);
   min-height: 100vh;
   padding: 2rem var(--space-xl);
-  position: relative;
-  overflow: hidden;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+	position: relative;
+	overflow: hidden;
+	display: flex;
+	align-items: center;
+	justify-content: center;
   box-shadow: none;
 }
 
@@ -224,7 +224,7 @@
 }
 
 /* Modern hero content layout */
-.hero-content {
+  .hero-content {
   max-width: 1200px;
 	width: 100%;
 	display: grid;
@@ -739,7 +739,7 @@
 }
 
 /* Interactive glow effect */
-.research-card-horizontal::before {
+  .research-card-horizontal::before {
 	content: '';
 	position: absolute;
 	top: 0;
@@ -825,9 +825,9 @@
 	.research-card-horizontal {
 		cursor: default;
 		min-height: var(--touch-target-min);
-	}
-	
-	.research-card-horizontal:hover {
+  }
+  
+  .research-card-horizontal:hover {
 		transform: translateY(-4px) scale(1.01);
 	}
 	
@@ -838,15 +838,15 @@
 }
 
 /* Enhanced card header with micro-interactions */
-.card-header {
+  .card-header {
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
 	margin-bottom: 1.5rem;
 	position: relative;
-}
-
-.card-icon {
+  }
+  
+  .card-icon {
 	font-size: 2.5rem;
 	display: flex;
 	align-items: center;
@@ -883,9 +883,9 @@
 .research-card-horizontal:hover .card-icon {
 	transform: scale(1.1) rotate(5deg);
 	box-shadow: 0 8px 24px rgba(30, 86, 160, 0.4);
-}
-
-.card-number {
+  }
+  
+  .card-number {
 	font-size: 1.2rem;
 	font-weight: 700;
 	color: var(--color-primary);
@@ -902,9 +902,9 @@
 	background: rgba(30, 86, 160, 0.15);
 	border-color: rgba(30, 86, 160, 0.4);
 	transform: scale(1.05);
-}
-
-.research-card-horizontal h3 {
+  }
+  
+  .research-card-horizontal h3 {
 	font-size: 1.4rem;
 	margin-bottom: 1rem;
 	font-family: var(--font-display);
@@ -918,9 +918,9 @@
 .research-card-horizontal:hover h3 {
 	color: var(--color-primary-dark);
 	transform: translateY(-2px);
-}
-
-.research-card-horizontal p {
+  }
+  
+  .research-card-horizontal p {
 	font-size: 0.9rem;
 	line-height: 1.6;
 	font-family: var(--font-primary);
@@ -936,7 +936,7 @@
 }
 
 /* Enhanced card footer with animated interactions */
-.card-footer {
+  .card-footer {
 	margin-top: auto;
 	padding-top: 1rem;
 	border-top: 1px solid rgba(30, 86, 160, 0.1);
@@ -945,9 +945,9 @@
 
 .research-card-horizontal:hover .card-footer {
 	border-top-color: rgba(30, 86, 160, 0.2);
-}
-
-.card-link {
+  }
+  
+  .card-link {
 	color: var(--color-primary);
 	text-decoration: none;
 	font-weight: 600;
@@ -975,21 +975,21 @@
 
 .card-link:hover::before {
 	width: 100%;
-}
-
-.card-link:hover {
+  }
+  
+  .card-link:hover {
 	color: var(--color-primary-dark);
 	transform: translateX(8px);
-}
-
-.card-link::after {
+  }
+  
+  .card-link::after {
 	content: '→';
 	font-size: 1.1em;
 	transition: transform var(--transition-bounce);
 	margin-left: 0.25rem;
-}
-
-.card-link:hover::after {
+  }
+  
+  .card-link:hover::after {
 	transform: translateX(4px) scale(1.1);
 }
 
@@ -1004,7 +1004,7 @@
 }
 
 /* Announcements Section - Transparent with blue tint overlay */
-.announcements-section {
+  .announcements-section {
 	/* Remove solid background - use transparent with overlay */
 	background: transparent;
 	color: #FFFFFF;
@@ -1015,7 +1015,7 @@
 	visibility: visible !important;
 	box-shadow: none;
 	position: relative;
-}
+  }
 
 /* Announcements section subtle overlay */
 .announcements-section::before {
@@ -1028,9 +1028,9 @@
 
 .announcements-section:hover::before {
 	opacity: 0.25;
-}
-
-.announcements-content {
+  }
+  
+  .announcements-content {
 	width: 100%;
 	max-width: 100%;
 	/* FORCE VISIBILITY */
@@ -1038,9 +1038,9 @@
 	visibility: visible !important;
 	position: relative;
 	z-index: 2;
-}
-
-.announcements-content h2 {
+  }
+  
+  .announcements-content h2 {
 	font-size: clamp(2rem, 5vw, 3rem);
 	margin-bottom: 2rem;
 	text-align: center;
@@ -1144,7 +1144,7 @@
 	align-items: center;
 	justify-content: center;
 	visibility: visible !important;
-}
+  }
 
 .sponsor-logo:hover {
 	background: rgba(255, 255, 255, 1);
@@ -1236,14 +1236,14 @@
   transform: translateY(-4px) translateZ(0);
   box-shadow: 0 16px 48px rgba(0, 0, 0, 0.25);
   background: rgba(255, 255, 255, 1);
-}
-
-.news-card-horizontal {
+  }
+  
+  .news-card-horizontal {
   background: rgba(255, 255, 255, 0.95);
   backdrop-filter: blur(15px);
   padding: 1.5rem;
-  border-radius: 12px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+	border-radius: 12px;
+	box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
   /* Remove conflicting animations */
   opacity: 1 !important;
   transform: none !important;
@@ -1251,9 +1251,9 @@
   min-width: clamp(280px, 22vw, 320px);
   max-width: clamp(280px, 22vw, 320px);
   min-height: 220px;
-  display: flex;
-  flex-direction: column;
-  visibility: visible !important;
+	display: flex;
+	flex-direction: column;
+	visibility: visible !important;
   position: relative;
   overflow: hidden;
   cursor: pointer;
@@ -1268,7 +1268,7 @@
 }
 
 /* Simplified hover effects */
-.news-card-horizontal:hover {
+  .news-card-horizontal:hover {
   transform: translateY(-3px) translateZ(0);
   box-shadow: 0 12px 32px rgba(0, 0, 0, 0.2);
   border-left-color: var(--color-primary);
@@ -1304,7 +1304,7 @@
 }
 
 /* Enhanced date styling with micro-interactions */
-.news-date {
+  .news-date {
 	color: var(--color-primary);
 	font-size: 0.9rem;
 	margin-bottom: 1rem;
@@ -1329,9 +1329,9 @@
 
 .news-card-horizontal:hover .news-date::after {
 	width: 100%;
-}
-
-.news-description {
+  }
+  
+  .news-description {
 	font-size: 1rem;
 	line-height: 1.6;
 	font-family: var(--font-primary);
@@ -1340,14 +1340,14 @@
 	flex-grow: 1;
 	margin-bottom: 1.5rem;
 	transition: color var(--transition-base);
-}
-
+  }
+  
 .news-card-horizontal:hover .news-description {
 	color: #1A1A1A;
 }
 
 /* Enhanced news link with advanced interactions */
-.news-link {
+  .news-link {
 	color: var(--color-primary);
 	text-decoration: none;
 	font-weight: 600;
@@ -1382,9 +1382,9 @@
 	font-size: 1.1em;
 	transition: transform var(--transition-bounce);
 	margin-left: 0.25rem;
-}
-
-.news-link:hover {
+  }
+  
+  .news-link:hover {
 	color: var(--color-primary-dark);
 	transform: translateX(5px);
 }
@@ -1404,28 +1404,28 @@
 		transform: translateY(-1px) scale(0.98);
 		transition-duration: var(--animation-duration-fast);
 	}
-}
-
-/* Scroll Indicator */
-.scroll-indicator {
+  }
+  
+  /* Scroll Indicator */
+  .scroll-indicator {
 	text-align: center;
 	margin-top: 2rem;
 	opacity: 0.7;
-}
-
-.scroll-indicator span {
+  }
+  
+  .scroll-indicator span {
 	color: rgba(255, 255, 255, 0.8);
 	font-family: 'Heebo', sans-serif;
 	font-size: 0.9rem;
 	font-style: italic;
-}
-
-/* Custom Scrollbar for horizontal sections */
-.horizontal-scroll-container::-webkit-scrollbar {
+  }
+  
+  /* Custom Scrollbar for horizontal sections */
+  .horizontal-scroll-container::-webkit-scrollbar {
 	width: 6px;
-}
-
-.horizontal-scroll-container::-webkit-scrollbar-track {
+  }
+  
+  .horizontal-scroll-container::-webkit-scrollbar-track {
   }
   
   .horizontal-scroll-container::-webkit-scrollbar-track {
@@ -1955,4 +1955,4 @@
 	min-width: max-content;
 	opacity: 1 !important;
 	visibility: visible !important;
-} 
+  } 

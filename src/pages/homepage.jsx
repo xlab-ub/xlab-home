@@ -1,6 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 import Lenis from '@studio-freight/lenis';
+import NavBar from '../components/common/navBar';
 import HeroSection from '../components/sections/HeroSection';
 import ResearchFieldsSection from '../components/sections/ResearchFieldsSection';
 import AnnouncementsSection from '../components/sections/AnnouncementsSection';
@@ -69,12 +70,18 @@ const Homepage = () => {
   }, []);
 
   return (
-    <div ref={containerRef} className="homepage-container">
-      <HeroSection />
-      <ResearchFieldsSection />
-      <AnnouncementsSection />
-      <SponsorsSection />
-    </div>
+    <>
+      {/* Experimental Navbar - positioned above content */}
+      <NavBar active="home" />
+      
+      {/* Homepage Content Container */}
+      <div ref={containerRef} className="homepage-container">
+        <HeroSection />
+        <ResearchFieldsSection />
+        <AnnouncementsSection />
+        <SponsorsSection />
+      </div>
+    </>
   );
 };
 
